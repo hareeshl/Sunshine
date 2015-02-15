@@ -188,7 +188,11 @@ public class ForecastFragment extends Fragment {
     {
         FetchWeatherTask weatherTask = new FetchWeatherTask();
         String location = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString(getString(R.string.pref_location_key),getString(R.string.pref_location_default));
-        weatherTask.execute(location);
+        String temperatureScale = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString(getString(R.string.pref_temperatureScale_key),getString(R.string.pref_temperatureScale_default));
+
+        Log.v("ForecastFragment:",location+","+temperatureScale);
+
+        weatherTask.execute(location,temperatureScale);
     }
 
     @Override
@@ -221,7 +225,7 @@ public class ForecastFragment extends Fragment {
             String forecastJosn = null;
 
             try {
-                URL url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?q=" + params[0] + "&mode=json&units=metric&cnt=7");
+                URL url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?q=" + params[0] + "&mode=json&units="+ params[1] +"&cnt=7");
 
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");

@@ -9,10 +9,17 @@
     <string name="pref_location_label">Location</string>
     <string name="pref_location_key" translatable="false">location</string>
     <string name="pref_location_default" translatable="false">98052</string>
+    <string name="pref_temperatureScale_key" translatable="false">pref_temperatureScale</string>
+    <string name="pref_temperatureScale_default" translatable="false">metric</string>
 
-    <string-array name="pref_temperature_unit">
+    <string-array name="pref_temperatureScale_unit">
         <item>Metric</item>
         <item>Imperial</item>
+    </string-array>
+
+    <string-array name="pref_temperatureScale_unit_values">
+        <item>metric</item>
+        <item>imperial</item>
     </string-array>
 
 </resources>

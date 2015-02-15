@@ -12,8 +12,10 @@
 
     <ListPreference
         android:title="Temperature scale"
-        android:entryValues="@array/pref_temperature_unit"
-        android:defaultValue="Metric"
+        android:entryValues="@array/pref_temperatureScale_unit_values"
+        android:entries="@array/pref_temperatureScale_unit"
+        android:defaultValue="@string/pref_temperatureScale_default"
+        android:key="@string/pref_temperatureScale_key"
     />
 
 </PreferenceScreen>
