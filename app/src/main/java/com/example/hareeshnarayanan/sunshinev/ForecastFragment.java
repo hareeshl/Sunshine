@@ -2,6 +2,7 @@ package com.example.hareeshnarayanan.sunshinev;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -59,16 +60,17 @@ public class ForecastFragment extends Fragment {
     {
         int id = item.getItemId();
 
-        Log.v("Selected Menu id",""+id);
-
-        if(id == R.id.action_refresh)
+        if(id == R.id.action_viewOnMap)
         {
-            FetchWeatherTask weatherTask = new FetchWeatherTask();
             SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
             String location = sharedPref.getString(getString(R.string.pref_location_key),getString(R.string.pref_location_default));
-            Log.v("ForecastFragment:Location",location);
-            weatherTask.execute(location);
-            return true;
+            Uri locationURI = Uri.parse("geo:0,0?q="+location);
+            Intent intent = new Intent(Intent.ACTION_VIEW,locationURI);
+
+            if(intent.resolveActivity(getActivity().getPackageManager()) != null)
+            {
+                startActivity(intent);
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -192,7 +194,7 @@ public class ForecastFragment extends Fragment {
 
         Log.v("ForecastFragment:",location+","+temperatureScale);
 
-        weatherTask.execute(location,temperatureScale);
+        weatherTask.execute(location, temperatureScale);
     }
 
     @Override
